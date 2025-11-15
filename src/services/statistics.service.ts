@@ -54,7 +54,6 @@ export const createStatisticsService = (db: Database) => {
         [patientId, now.toISOString()],
         (err, row: any) => {
           if (err) {
-            console.error('Error in consultasRealizadas:', err);
             resolve(createError('Error fetching patient statistics'));
             return;
           }
@@ -176,7 +175,6 @@ export const createStatisticsService = (db: Database) => {
         [doctorId, startOfMonth, now.toISOString()],
         (err, row: any) => {
           if (err) {
-            console.error('Error in consultasEsteMes:', err);
             resolve(createError('Error fetching doctor statistics'));
             return;
           }
@@ -187,7 +185,6 @@ export const createStatisticsService = (db: Database) => {
             [doctorId],
             (err, row: any) => {
               if (err) {
-                console.error('Error in pacientesAtendidos:', err);
                 resolve(createError('Error fetching doctor statistics'));
                 return;
               }
@@ -200,7 +197,6 @@ export const createStatisticsService = (db: Database) => {
                 [doctorId],
                 (err, row: any) => {
                   if (err) {
-                    console.error('Error in avaliacaoMedia:', err);
                     resolve(createError('Error fetching doctor statistics'));
                     return;
                   }
@@ -248,7 +244,6 @@ export const createStatisticsService = (db: Database) => {
                             [doctorId],
                             (err, rows: any[]) => {
                               if (err) {
-                                console.error('Error in distribuicaoHorarios:', err);
                                 resolve(createError('Error fetching doctor statistics'));
                                 return;
                               }
