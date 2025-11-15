@@ -12,13 +12,20 @@
     "test:unit": "jest tests/unit",
     "test:integration": "jest tests/integration"
   },
-  "keywords": ["api", "medical", "agenda", "appointments", "healthcare"],
+  "keywords": [
+    "api",
+    "medical",
+    "agenda",
+    "appointments",
+    "healthcare"
+  ],
   "author": "",
   "license": "ISC",
   "description": "Medical Agenda API - A functional TypeScript implementation for managing medical appointments",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",

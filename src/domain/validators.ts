@@ -35,6 +35,13 @@ export const appointmentSchema = z.object({
   status: z.string().min(1),
 });
 
+export const feedbackSchema = z.object({
+  appointmentId: z.number().int().positive(),
+  patientId: z.number().int().positive(),
+  rating: z.number().int().min(1).max(5),
+  comment: z.string().optional(),
+});
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),

@@ -7,16 +7,23 @@ import { createPatientRepository } from './database/repositories/patient.reposit
 import { createDoctorRepository } from './database/repositories/doctor.repository';
 import { createSpecialtyRepository } from './database/repositories/specialty.repository';
 import { createAppointmentRepository } from './database/repositories/appointment.repository';
+import { createFeedbackRepository } from './database/repositories/feedback.repository';
 import { createAuthService } from './services/auth.service';
 import { createPatientService } from './services/patient.service';
 import { createDoctorService } from './services/doctor.service';
 import { createSpecialtyService } from './services/specialty.service';
 import { createAppointmentService } from './services/appointment.service';
+import { createFeedbackService } from './services/feedback.service';
+import { createStatisticsService } from './services/statistics.service';
+import { createNotificationService } from './services/notification.service';
 import { createAuthRoutes } from './routes/auth.routes';
 import { createPatientRoutes } from './routes/patient.routes';
 import { createDoctorRoutes } from './routes/doctor.routes';
 import { createSpecialtyRoutes } from './routes/specialty.routes';
 import { createAppointmentRoutes } from './routes/appointment.routes';
+import { createFeedbackRoutes } from './routes/feedback.routes';
+import { createStatisticsRoutes } from './routes/statistics.routes';
+import { createNotificationRoutes } from './routes/notification.routes';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 
 const createApp = async (): Promise<Express> => {
@@ -33,6 +40,7 @@ const createApp = async (): Promise<Express> => {
   const doctorRepository = createDoctorRepository(db);
   const specialtyRepository = createSpecialtyRepository(db);
   const appointmentRepository = createAppointmentRepository(db);
+  const feedbackRepository = createFeedbackRepository(db);
 
   const authService = createAuthService(userRepository);
   const patientService = createPatientService(patientRepository, userRepository);
@@ -44,12 +52,18 @@ const createApp = async (): Promise<Express> => {
     doctorRepository,
     specialtyRepository
   );
+  const feedbackService = createFeedbackService(feedbackRepository);
+  const statisticsService = createStatisticsService(db);
+  const notificationService = createNotificationService(db);
 
   app.use('/auth', createAuthRoutes(authService));
   app.use('/patient', createPatientRoutes(patientService));
   app.use('/doctor', createDoctorRoutes(doctorService));
   app.use('/specialty', createSpecialtyRoutes(specialtyService));
   app.use('/appointment', createAppointmentRoutes(appointmentService));
+  app.use('/feedback', createFeedbackRoutes(feedbackService));
+  app.use('/statistics', createStatisticsRoutes(statisticsService));
+  app.use('/notifications', createNotificationRoutes(notificationService));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });

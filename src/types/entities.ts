@@ -46,6 +46,17 @@ export type Appointment = {
   patient?: Patient;
   doctor?: Doctor;
   specialty?: Specialty;
+  feedback?: Feedback;
+};
+
+export type Feedback = {
+  id: number;
+  appointmentId: number;
+  patientId: number;
+  rating: number;
+  comment: string | null;
+  createdAt: Date;
+  patient?: Patient;
 };
 
 export type UserWithoutPassword = Omit<User, 'password'>;
@@ -59,4 +70,5 @@ export type NewUser = {
 export type NewPatient = Omit<Patient, 'id'>;
 export type NewDoctor = Omit<Doctor, 'id' | 'specialty'>;
 export type NewSpecialty = Omit<Specialty, 'id'>;
-export type NewAppointment = Omit<Appointment, 'id' | 'patient' | 'doctor' | 'specialty'>;
+export type NewAppointment = Omit<Appointment, 'id' | 'patient' | 'doctor' | 'specialty' | 'feedback'>;
+export type NewFeedback = Omit<Feedback, 'id' | 'createdAt' | 'patient'>;
